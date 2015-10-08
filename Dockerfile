@@ -1,8 +1,5 @@
 FROM postgres:9.3
 
-# TEMP...prevent downloading over and over again
-ADD wso2is-5.0.0.zip /opt/wso2is-5.0.0.zip
-
 # Add init scripts
 ADD init-wso2.sh /docker-entrypoint-initdb.d/init-wso2.sh
 
@@ -10,7 +7,7 @@ ADD init-wso2.sh /docker-entrypoint-initdb.d/init-wso2.sh
 # Came from https://docs.wso2.com/display/CLUSTER420/Configuring+the+Pre-Packaged+Identity+Server+5.0.0+with+API+Manager+1.9.1
 
 RUN apt-get update && apt-get install -y unzip && \
-    #wget -P /opt/ http://product-dist.wso2.com/downloads/api-manager/1.9.1/identity-server/wso2is-5.0.0.zip && \
+    wget -P /opt/ http://product-dist.wso2.com/downloads/api-manager/1.9.1/identity-server/wso2is-5.0.0.zip && \
     unzip /opt/wso2is-5.0.0.zip wso2is-5.0.0/dbscripts/* -d /opt && \
     mv /opt/wso2is-5.0.0 /opt/wso2 && \
     rm /opt/wso2is-5.0.0.zip && \
