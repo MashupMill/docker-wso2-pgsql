@@ -1,5 +1,9 @@
 FROM postgres:9.3
 
+ENV POSTGRES_DB=wso2carbon_db \
+    POSTGRES_USER=wso2 \
+    POSTGRES_PASSWORD=wso2
+
 # Add init scripts
 ADD init-wso2.sh /docker-entrypoint-initdb.d/init-wso2.sh
 
